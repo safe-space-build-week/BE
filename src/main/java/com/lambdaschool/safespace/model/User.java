@@ -33,6 +33,7 @@ public class User extends Auditable
     {
     }
 
+
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
@@ -42,6 +43,22 @@ public class User extends Auditable
         }
         this.userRoles = userRoles;
     }
+
+    // public User(String username, String password)
+    // {
+    //     setUsername(username);
+    //     setPassword(password);
+    //
+    //     Role role = new Role("user");
+    //
+    //     ArrayList<UserRoles> userRoles = new ArrayList<>();
+    //     userRoles.add(new UserRoles(new User(), role));
+    //
+    //     for (UserRoles ur : userRoles) {
+    //         ur.setUser(this);
+    //     }
+    //     this.setUserRoles(userRoles);
+    // }
 
     public long getUserid()
     {
