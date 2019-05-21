@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -25,5 +26,13 @@ public class UserController
         newUser = userService.save(newUser);
 
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @GetMapping(value = "/users", produces = {"application/json"})
+    public ResponseEntity<?> listAllUsers()
+    {
+        List<User> myUsers = userService.findAll();
+        return new ResponseEntity<>(myUsers, HttpStatus.OK);
     }
 }
