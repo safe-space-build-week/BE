@@ -1,6 +1,7 @@
 package com.lambdaschool.safespace.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -26,7 +27,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
         // http.anonymous().disable();
         // remember that there is also security set in the UserController!
         http.authorizeRequests()
-                .antMatchers("/",                       // h2
+                .antMatchers(
+                        "/user/register", // User Registration
+                        "/",                       // h2
                         "/h2-console/**",          // h2
                         "/v2/api-docs",            // swagger
                         "/swagger-resources",      // swagger
@@ -37,12 +40,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                         "/webjars/**"              // swagger
                 ).permitAll()
                 // hasAnyRole can be a list of roles as in "ADMIN", "DATA"
-                .antMatchers("/**").authenticated()
+                .antMatchers("/notes/**").authenticated()
                 .antMatchers("/actuator/**").hasAnyRole("ADMIN")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 
         // http.requiresChannel().anyRequest().requiresSecure();
-        http.csrf().disable();
+        //POTENTIAL CORS ISSUE BELOW
+        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll();
         http.headers().frameOptions().disable();
     }
 }
