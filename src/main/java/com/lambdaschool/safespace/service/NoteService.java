@@ -12,7 +12,7 @@ public interface NoteService
 
     void delete(long id);
 
-    Note save(Note user);
+    Note save(Note note);
 
-    Note update(Note user, long id);
+    Note update(Note note, long id);
 }

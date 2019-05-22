@@ -10,6 +10,8 @@ public interface UserService
 
     User findUserById(long id);
 
+    User findUserByUsername(String name);
+
     void delete(long id);
 
     User save(User user);

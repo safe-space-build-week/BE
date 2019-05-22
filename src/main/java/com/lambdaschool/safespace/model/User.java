@@ -26,6 +26,7 @@ public class User extends Auditable
 
     private String name;
     private String email;
+    private String phone;
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
@@ -151,6 +152,16 @@ public class User extends Auditable
     public void setUserRoles(List<UserRoles> userRoles)
     {
         this.userRoles = userRoles;
+    }
+
+    public List<Note> getNotes()
+    {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes)
+    {
+        this.notes = notes;
     }
 
     public List<SimpleGrantedAuthority> getAuthority()
