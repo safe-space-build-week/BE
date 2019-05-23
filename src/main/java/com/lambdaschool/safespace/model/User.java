@@ -53,12 +53,13 @@ public class User extends Auditable
         this.userRoles = userRoles;
     }
 
-    public User(String username, String password, String name, String email, List<UserRoles> userRoles, List<Note> notes)
+    public User(String username, String password, String name, String email, String phone, List<UserRoles> userRoles, List<Note> notes)
     {
         setUsername(username);
         setPassword(password);
         this.name = name;
         this.email = email;
+        this.phone = phone;
         for (UserRoles ur : userRoles) {
             ur.setUser(this);
         }
@@ -67,6 +68,7 @@ public class User extends Auditable
         for (Note n : notes) {
             n.setUser(this);
         }
+        notes.add(new Note("Welcome to SafeSpace!", this));
         this.notes = notes;
 
     }
@@ -106,6 +108,16 @@ public class User extends Auditable
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
     }
 
     public long getUserid()
