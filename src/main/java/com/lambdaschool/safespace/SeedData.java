@@ -53,8 +53,8 @@ public class SeedData implements CommandLineRunner
         sampleNotesTwo.add(new Note("You're doing a great job!"));
 
 
-        User u1 = new User("dano", "password", "Dan", "dan47573@gmail.com", "7742696689", users, sampleNotesTwo);
-        User u2 = new User("admin", "password", "Admin", "danpatrickoneill@gmail.com", "5555555555", admins, sampleNotes);
+        User u1 = new User("dano", "password", "Dan", "dan47573@gmail.com", "17742696689", users, sampleNotesTwo);
+        User u2 = new User("admin", "password", "Admin", "danpatrickoneill@gmail.com", "17742696689", admins, sampleNotes);
 
 
         userrepos.save(u1);
