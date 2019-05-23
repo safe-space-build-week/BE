@@ -1,5 +1,6 @@
 package com.lambdaschool.safespace.service;
 
+import com.lambdaschool.safespace.model.Note;
 import com.lambdaschool.safespace.model.User;
 import com.lambdaschool.safespace.model.UserRoles;
 import com.lambdaschool.safespace.repository.RoleRepository;
@@ -80,6 +81,12 @@ public class UserServiceImpl implements UserDetailsService, UserService
             newRoles.add(new UserRoles(newUser, ur.getRole()));
         }
         newUser.setUserRoles(newRoles);
+
+        ArrayList<Note> newNotes = new ArrayList<>();
+        for (Note n : user.getNotes()) {
+            newNotes.add(new Note(n.getText(), newUser));
+        }
+        newUser.setNotes(newNotes);
 
         return userrepos.save(newUser);
     }
