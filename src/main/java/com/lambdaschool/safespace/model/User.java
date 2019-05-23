@@ -59,6 +59,7 @@ public class User extends Auditable
         setPassword(password);
         this.name = name;
         this.email = email;
+        this.phone = phone;
         for (UserRoles ur : userRoles) {
             ur.setUser(this);
         }
@@ -67,6 +68,7 @@ public class User extends Auditable
         for (Note n : notes) {
             n.setUser(this);
         }
+        notes.add(new Note("Welcome to SafeSpace!", this));
         this.notes = notes;
 
     }
