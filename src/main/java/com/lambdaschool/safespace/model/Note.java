@@ -24,6 +24,11 @@ public class Note extends Auditable
     {
     }
 
+    public Note(String text)
+    {
+        this.text = text;
+    }
+
     public Note(String text, User user)
     {
         this.text = text;

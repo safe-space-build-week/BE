@@ -53,7 +53,7 @@ public class User extends Auditable
         this.userRoles = userRoles;
     }
 
-    public User(String username, String password, String name, String email, List<UserRoles> userRoles, List<Note> notes)
+    public User(String username, String password, String name, String email, String phone, List<UserRoles> userRoles, List<Note> notes)
     {
         setUsername(username);
         setPassword(password);

@@ -1,6 +1,7 @@
 package com.lambdaschool.safespace;
 
 
+import com.lambdaschool.safespace.model.Note;
 import com.lambdaschool.safespace.model.Role;
 import com.lambdaschool.safespace.model.User;
 import com.lambdaschool.safespace.model.UserRoles;
@@ -43,9 +44,13 @@ public class SeedData implements CommandLineRunner
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
 
+        ArrayList<Note> sampleNotes = new ArrayList<>();
+        sampleNotes.add(new Note("Have a great day!"));
+        sampleNotes.add(new Note("You're doing a great job!"));
 
-        User u1 = new User("dano", "password", users);
-        User u2 = new User("admin", "password", admins);
+
+        User u1 = new User("dano", "password", "Dan", "dan47573@gmail.com", "7742696689", users, sampleNotes);
+        User u2 = new User("admin", "password", "Admin", "danpatrickoneill@gmail.com", "7742696689", admins, sampleNotes);
 
 
         userrepos.save(u1);
