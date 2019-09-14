@@ -24,14 +24,24 @@ public class User extends Auditable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    private String name;
+    private String email;
+    private String phone;
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<UserRoles> userRoles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Note> notes = new ArrayList<>();
+
     public User()
     {
     }
+
 
     public User(String username, String password, List<UserRoles> userRoles)
     {
@@ -41,6 +51,73 @@ public class User extends Auditable
             ur.setUser(this);
         }
         this.userRoles = userRoles;
+    }
+
+    public User(String username, String password, String name, String email, String phone, List<UserRoles> userRoles, List<Note> notes)
+    {
+        setUsername(username);
+        setPassword(password);
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        for (UserRoles ur : userRoles) {
+            ur.setUser(this);
+        }
+        this.userRoles = userRoles;
+
+        for (Note n : notes) {
+            n.setUser(this);
+        }
+        notes.add(new Note("Welcome to SafeSpace!", this));
+        this.notes = notes;
+
+    }
+
+    // public User(String username, String password)
+    // {
+    //     setUsername(username);
+    //     setPassword(password);
+    //
+    //     Role role = new Role("user");
+    //
+    //     ArrayList<UserRoles> userRoles = new ArrayList<>();
+    //     userRoles.add(new UserRoles(new User(), role));
+    //
+    //     for (UserRoles ur : userRoles) {
+    //         ur.setUser(this);
+    //     }
+    //     this.setUserRoles(userRoles);
+    // }
+
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public String getPhone()
+    {
+        return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
     }
 
     public long getUserid()
@@ -87,6 +164,16 @@ public class User extends Auditable
     public void setUserRoles(List<UserRoles> userRoles)
     {
         this.userRoles = userRoles;
+    }
+
+    public List<Note> getNotes()
+    {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes)
+    {
+        this.notes = notes;
     }
 
     public List<SimpleGrantedAuthority> getAuthority()
